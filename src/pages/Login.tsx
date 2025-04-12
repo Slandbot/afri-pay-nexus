@@ -1,5 +1,5 @@
 
-import { useState, FormEvent } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import Logo from '@/components/Logo';
@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { AlertCircle, Loader2, Key } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -446,24 +446,38 @@ const Login = () => {
             </form>
           )}
         </CardContent>
-        <CardFooter className="flex justify-center">
-          <p className="text-sm text-gray-500">
-            {activeTab === 'login' ? (
-              <>
-                Don't have an account?{' '}
-                <Button variant="link" className="p-0 h-auto text-afri-primary" onClick={() => setActiveTab('signup')}>
-                  Sign up
-                </Button>
-              </>
-            ) : (
-              <>
-                Already have an account?{' '}
-                <Button variant="link" className="p-0 h-auto text-afri-primary" onClick={() => setActiveTab('login')}>
-                  Log in
-                </Button>
-              </>
-            )}
-          </p>
+        <CardFooter className="flex flex-col items-center">
+          <div className="flex justify-center mb-2">
+            <p className="text-sm text-gray-500">
+              {activeTab === 'login' ? (
+                <>
+                  Don't have an account?{' '}
+                  <Button variant="link" className="p-0 h-auto text-afri-primary" onClick={() => setActiveTab('signup')}>
+                    Sign up
+                  </Button>
+                </>
+              ) : (
+                <>
+                  Already have an account?{' '}
+                  <Button variant="link" className="p-0 h-auto text-afri-primary" onClick={() => setActiveTab('login')}>
+                    Log in
+                  </Button>
+                </>
+              )}
+            </p>
+          </div>
+          
+          {/* New Admin Login Link */}
+          <div className="flex justify-center">
+            <Button 
+              variant="ghost" 
+              className="text-sm text-gray-500 hover:text-afri-primary"
+              onClick={() => navigate('/admin-login')}
+            >
+              <Key className="mr-2 h-4 w-4" />
+              Admin Login
+            </Button>
+          </div>
         </CardFooter>
       </Card>
     </div>

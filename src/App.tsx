@@ -11,6 +11,7 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 // Authentication Pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import AdminLogin from "./pages/AdminLogin";  // New Admin Login Page
 import Terms from "./pages/Terms";
 
 // Dashboard Pages
@@ -36,6 +37,7 @@ const App = () => (
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/admin-login" element={<AdminLogin />} />  {/* New Admin Login Route */}
             <Route path="/terms" element={<Terms />} />
             
             {/* Neutral User Routes */}
