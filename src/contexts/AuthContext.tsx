@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { useToast } from "@/components/ui/use-toast";
 
@@ -19,6 +18,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (phoneNumber: string, otp: string) => Promise<void>;
+  adminLogin: (email: string, password: string) => Promise<void>;
   logout: () => void;
   signup: (userData: Omit<User, 'id' | 'role'>) => Promise<void>;
   verifyPhone: (phoneNumber: string) => Promise<{exists: boolean}>;
@@ -156,6 +156,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  // Mock admin login function
+  const adminLogin = async (email: string, password: string): Promise<void> => {
+    setIsLoading(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // For demo purposes, accept specific admin credentials
+    // In a real app, this would validate against a backend
+    if (email === 'admin@afripay.com' && password === 'admin123') {
+      const mockAdminUser: User = {
+        id: 'admin-' + Math.random().toString(36).substring(2, 9),
+        firstName: "Admin",
+        lastName: "User",
+        username: "adminuser",
+        phoneNumber: "",
+        role: 'admin',
+        acceptedTerms: true,
+      };
+      
+      localStorage.setItem('afriPayUser', JSON.stringify(mockAdminUser));
+      setUser(mockAdminUser);
+      
+      toast({
+        title: "Admin Login Successful",
+        description: "Welcome to the Admin Dashboard",
+      });
+    } else {
+      throw new Error('Invalid admin credentials');
+    }
+    
+    setIsLoading(false);
+  };
+
   // Logout function
   const logout = (): void => {
     setUser(null);
@@ -197,6 +231,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isAuthenticated: !!user,
         isLoading,
         login,
+        adminLogin,
         logout,
         signup,
         verifyPhone,
