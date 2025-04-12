@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -9,7 +8,7 @@ import {
   Home, ClipboardList, Clock, CheckCircle, XCircle, 
   FileText, Users, Settings, ShoppingBag, UserCheck, 
   LogOut, FileEdit, CreditCard, PieChart, ChevronsUpDown,
-  User
+  User, FileCheck
 } from 'lucide-react';
 
 import {
@@ -77,34 +76,39 @@ const Sidebar = ({ collapsed, toggleCollapse }: SidebarProps) => {
       to: '/admin-dashboard',
     },
     {
+      label: 'Approvals',
+      icon: <FileCheck size={18} />,
+      to: '/admin-dashboard/approvals',
+    },
+    {
       label: 'Users',
       icon: <Users size={18} />,
-      to: '/admin/users',
+      to: '/admin-dashboard/users',
     },
     {
       label: 'Merchants',
       icon: <ShoppingBag size={18} />,
-      to: '/admin/merchants',
+      to: '/admin-dashboard/merchants',
     },
     {
       label: 'Agents',
       icon: <UserCheck size={18} />,
-      to: '/admin/agents',
+      to: '/admin-dashboard/agents',
     },
     {
       label: 'Transactions',
       icon: <CreditCard size={18} />,
-      to: '/admin/transactions',
+      to: '/admin-dashboard/transactions',
     },
     {
       label: 'Reports',
       icon: <FileText size={18} />,
-      to: '/admin/reports',
+      to: '/admin-dashboard/reports',
     },
     {
       label: 'Settings',
       icon: <Settings size={18} />,
-      to: '/admin/settings',
+      to: '/admin-dashboard/settings',
     },
   ];
 

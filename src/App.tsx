@@ -11,7 +11,7 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 // Authentication Pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import AdminLogin from "./pages/AdminLogin";  // New Admin Login Page
+import AdminLogin from "./pages/AdminLogin";
 import Terms from "./pages/Terms";
 
 // Dashboard Pages
@@ -20,6 +20,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import MerchantDashboard from "./pages/MerchantDashboard";
 import AgentDashboard from "./pages/AgentDashboard";
 import ServiceRequest from "./pages/ServiceRequest";
+
+// Admin Pages
+import ApprovalsPage from "./pages/admin/ApprovalsPage";
 
 // Error Pages
 import NotFound from "./pages/NotFound";
@@ -37,7 +40,7 @@ const App = () => (
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin-login" element={<AdminLogin />} />  {/* New Admin Login Route */}
+            <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/terms" element={<Terms />} />
             
             {/* Neutral User Routes */}
@@ -74,7 +77,13 @@ const App = () => (
               }
             >
               <Route index element={<AdminDashboard />} />
-              {/* Add other admin routes here */}
+              <Route path="approvals" element={<ApprovalsPage />} />
+              <Route path="users" element={<div className="p-4">Users management page (coming soon)</div>} />
+              <Route path="merchants" element={<div className="p-4">Merchants management page (coming soon)</div>} />
+              <Route path="agents" element={<div className="p-4">Agents management page (coming soon)</div>} />
+              <Route path="transactions" element={<div className="p-4">Transactions page (coming soon)</div>} />
+              <Route path="reports" element={<div className="p-4">Reports page (coming soon)</div>} />
+              <Route path="settings" element={<div className="p-4">Settings page (coming soon)</div>} />
             </Route>
             
             {/* Merchant Routes */}
@@ -87,7 +96,10 @@ const App = () => (
               }
             >
               <Route index element={<MerchantDashboard />} />
-              {/* Add other merchant routes here */}
+              <Route path="transactions" element={<div className="p-4">Transactions page (coming soon)</div>} />
+              <Route path="reports" element={<div className="p-4">Reports page (coming soon)</div>} />
+              <Route path="business" element={<div className="p-4">Business page (coming soon)</div>} />
+              <Route path="settings" element={<div className="p-4">Settings page (coming soon)</div>} />
             </Route>
             
             {/* Agent Routes */}
@@ -100,7 +112,10 @@ const App = () => (
               }
             >
               <Route index element={<AgentDashboard />} />
-              {/* Add other agent routes here */}
+              <Route path="transfer" element={<div className="p-4">Money Transfer page (coming soon)</div>} />
+              <Route path="airtime" element={<div className="p-4">Airtime & Data page (coming soon)</div>} />
+              <Route path="transactions" element={<div className="p-4">Transactions page (coming soon)</div>} />
+              <Route path="settings" element={<div className="p-4">Settings page (coming soon)</div>} />
             </Route>
             
             {/* For testing dashboards during development */}
