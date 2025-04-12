@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { CheckCircle, XCircle, Eye, FileText, User } from "lucide-react";
+import { CheckCircle, XCircle, Eye, FileText, User, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 // Mock data for service requests
