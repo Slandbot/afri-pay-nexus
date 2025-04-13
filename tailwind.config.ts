@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -51,6 +52,7 @@ export default {
           white: '#FFFFFF',
         },
         
+        // Update main color scheme to prioritize the most frequently used colors
         primary: {
           DEFAULT: '#EC6408',
           foreground: '#FFFFFF',
