@@ -1,87 +1,56 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 42 100% 97%; /* #FFF8EF */
+    --foreground: 0 0% 7%; /* #111111 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --primary: 16 89% 46%; /* #EC6408 */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --secondary: 16 89% 45%; /* #EC660A */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --primary: 142 78% 36%; /* AfriPay Green */
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 152 80% 20%; /* Darker green */
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 29 100% 63%; /* Orange accent */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 239 65% 52%; /* #4243DC */
+    --accent-foreground: 0 0% 100%; /* #FFFFFF */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 142 78% 36%;
+    --ring: 16 89% 46%; /* Primary color */
 
     --radius: 0.5rem;
-
-    --sidebar-background: 152 80% 20%; /* Darker green */
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 142 78% 36%; /* Green */
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 29 100% 63%; /* Orange accent */
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 142 70% 45%;
-    --sidebar-ring: 142 78% 36%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 7%; /* #111111 */
+    --foreground: 42 100% 97%; /* #FFF8EF */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --primary: 16 89% 45%; /* #EC660A */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --secondary: 16 89% 46%; /* #EC6408 */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --primary: 142 70% 36%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 152 65% 20%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 29 80% 50%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 239 65% 52%; /* #4243DC */
+    --accent-foreground: 0 0% 100%; /* #FFFFFF */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 142 70% 36%;
-
-    --sidebar-background: 152 65% 15%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 142 70% 36%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 29 80% 50%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 152 60% 25%;
-    --sidebar-ring: 142 70% 40%;
+    --ring: 239 65% 52%; /* Accent color */
   }
 }
 
@@ -124,4 +93,3 @@
     @apply text-xl font-bold text-afri-neutral mb-4 border-b pb-2 border-gray-200;
   }
 }
-
