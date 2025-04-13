@@ -9,8 +9,8 @@ interface LogoProps {
 
 const Logo = ({ 
   size = 'md', 
-  textColor = 'text-afri-primary', 
-  iconColor = 'text-afri-accent' 
+  textColor = 'text-primary', 
+  iconColor = 'text-accent' 
 }: LogoProps) => {
   const sizeClasses = {
     sm: 'text-lg',
@@ -28,7 +28,7 @@ const Logo = ({
     <div className="flex items-center gap-2">
       <CircleDollarSign className={`${iconColor}`} size={iconSizes[size]} />
       <span className={`font-bold ${sizeClasses[size]} ${textColor}`}>
-        AfriPay<span className="text-afri-accent">Nexus</span>
+        AfriPay<span className="text-accent">Nexus</span>
       </span>
     </div>
   );
