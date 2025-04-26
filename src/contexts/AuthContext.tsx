@@ -220,6 +220,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         phoneNumber,
         role: 'neutral',
         acceptedTerms: true,
+        createdAt: new Date(),
       };
       
       localStorage.setItem('afriPayUser', JSON.stringify(mockUser));
