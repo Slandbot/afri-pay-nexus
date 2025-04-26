@@ -9,9 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { AlertCircle, Loader2, Key } from 'lucide-react';
+import { AlertCircle, Loader2, Key, Shield } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/components/ui/use-toast';
+import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 
 // Country codes for dropdown
 const countryCodes = [
@@ -161,16 +162,19 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 afri-pattern-bg p-4">
-      <Card className="w-full max-w-md shadow-lg animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 afri-pattern-bg p-4">
+      <div className="absolute top-4 right-4">
+        <ThemeSwitcher />
+      </div>
+      <Card className="w-full max-w-md shadow-lg animate-fade-in dark:bg-gray-800">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <Logo size="lg" />
           </div>
-          <CardTitle className="text-2xl font-bold text-afri-secondary">
+          <CardTitle className="text-2xl font-bold text-afri-secondary dark:text-afri-primary">
             {showCredentialForm ? 'Complete Your Registration' : 'Welcome Back'}
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="dark:text-gray-300">
             {showCredentialForm 
               ? 'Please fill in your information to complete registration' 
               : 'Log in to access your account or sign up to create a new one'}
@@ -448,7 +452,7 @@ const Login = () => {
         </CardContent>
         <CardFooter className="flex flex-col items-center">
           <div className="flex justify-center mb-2">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {activeTab === 'login' ? (
                 <>
                   Don't have an account?{' '}
@@ -467,15 +471,24 @@ const Login = () => {
             </p>
           </div>
           
-          {/* New Admin Login Link */}
-          <div className="flex justify-center">
+          {/* Admin Login Links */}
+          <div className="flex justify-center gap-2">
             <Button 
               variant="ghost" 
-              className="text-sm text-gray-500 hover:text-afri-primary"
+              className="text-sm text-gray-500 dark:text-gray-400 hover:text-afri-primary"
               onClick={() => navigate('/admin-login')}
             >
               <Key className="mr-2 h-4 w-4" />
               Admin Login
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              className="text-sm text-gray-500 dark:text-gray-400 hover:text-afri-primary"
+              onClick={() => navigate('/superadmin-login')}
+            >
+              <Shield className="mr-2 h-4 w-4" />
+              SuperAdmin
             </Button>
           </div>
         </CardFooter>

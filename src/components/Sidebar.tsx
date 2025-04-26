@@ -8,7 +8,7 @@ import {
   Home, ClipboardList, Clock, CheckCircle, XCircle, 
   FileText, Users, Settings, ShoppingBag, UserCheck, 
   LogOut, FileEdit, CreditCard, PieChart, ChevronsUpDown,
-  User, FileCheck
+  User, FileCheck, Shield, Lock, FileSpreadsheet, Bell
 } from 'lucide-react';
 
 import {
@@ -32,7 +32,6 @@ const Sidebar = ({ collapsed, toggleCollapse }: SidebarProps) => {
     setOpenGroup(openGroup === group ? null : group);
   };
 
-  // Different sidebar menu items based on user role
   const getNeutralMenuItems = () => [
     {
       label: 'Dashboard',
@@ -66,6 +65,49 @@ const Sidebar = ({ collapsed, toggleCollapse }: SidebarProps) => {
           to: '/requests/rejected',
         },
       ],
+    },
+  ];
+
+  const getSuperAdminMenuItems = () => [
+    {
+      label: 'Dashboard',
+      icon: <Home size={18} />,
+      to: '/superadmin-dashboard',
+    },
+    {
+      label: 'User Management',
+      icon: <Users size={18} />,
+      to: '/superadmin-dashboard/users',
+    },
+    {
+      label: 'Admin Management',
+      icon: <Shield size={18} />,
+      to: '/superadmin-dashboard/admins',
+    },
+    {
+      label: 'System Logs',
+      icon: <FileSpreadsheet size={18} />,
+      to: '/superadmin-dashboard/logs',
+    },
+    {
+      label: 'Approvals',
+      icon: <FileCheck size={18} />,
+      to: '/superadmin-dashboard/approvals',
+    },
+    {
+      label: 'Notifications',
+      icon: <Bell size={18} />,
+      to: '/superadmin-dashboard/notifications',
+    },
+    {
+      label: 'Security Settings',
+      icon: <Lock size={18} />,
+      to: '/superadmin-dashboard/security',
+    },
+    {
+      label: 'System Settings',
+      icon: <Settings size={18} />,
+      to: '/superadmin-dashboard/settings',
     },
   ];
 
@@ -168,11 +210,12 @@ const Sidebar = ({ collapsed, toggleCollapse }: SidebarProps) => {
     },
   ];
 
-  // Get menu items based on user role
   const getMenuItems = () => {
     if (!user) return [];
 
     switch (user.role) {
+      case 'superAdmin':
+        return getSuperAdminMenuItems();
       case 'admin':
         return getAdminMenuItems();
       case 'merchant':
@@ -186,7 +229,6 @@ const Sidebar = ({ collapsed, toggleCollapse }: SidebarProps) => {
 
   const menuItems = getMenuItems();
 
-  // Render a single menu item
   const renderMenuItem = (item: any, index: number) => {
     if (item.isGroup) {
       return (
@@ -255,27 +297,46 @@ const Sidebar = ({ collapsed, toggleCollapse }: SidebarProps) => {
         )}
       </div>
 
-      {/* User profile section */}
       {!collapsed && user && (
         <div className="p-4 border-b border-sidebar-border">
           <div className="flex items-center gap-2">
-            <div className="bg-white/20 rounded-full p-1">
-              <User size={24} className="text-white" />
+            <div className={`rounded-full p-1 ${
+              user.role === 'superAdmin' 
+                ? 'bg-red-400/20' 
+                : user.role === 'admin' 
+                  ? 'bg-blue-400/20' 
+                  : 'bg-white/20'
+            }`}>
+              {user.role === 'superAdmin' ? (
+                <Shield size={24} className="text-red-100" />
+              ) : user.role === 'admin' ? (
+                <Lock size={24} className="text-blue-100" />
+              ) : (
+                <User size={24} className="text-white" />
+              )}
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-medium">{user.firstName} {user.lastName}</span>
-              <span className="text-xs text-white/70">{user.role.charAt(0).toUpperCase() + user.role.slice(1)}</span>
+              <span className={`text-xs ${
+                user.role === 'superAdmin' 
+                  ? 'text-red-200' 
+                  : user.role === 'admin' 
+                    ? 'text-blue-200' 
+                    : 'text-white/70'
+              }`}>
+                {user.role === 'superAdmin' 
+                  ? 'SuperAdmin' 
+                  : user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+              </span>
             </div>
           </div>
         </div>
       )}
 
-      {/* Navigation menu */}
       <div className="flex-1 py-4 flex flex-col gap-1 overflow-auto">
         {menuItems.map(renderMenuItem)}
       </div>
 
-      {/* Collapse button and logout */}
       <div className="p-4 border-t border-sidebar-border flex flex-col gap-2">
         <Button
           variant="outline"

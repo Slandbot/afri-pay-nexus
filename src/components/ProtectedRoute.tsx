@@ -1,5 +1,5 @@
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth, UserRole } from '@/contexts/AuthContext';
 
@@ -7,17 +7,36 @@ interface ProtectedRouteProps {
   children: ReactNode;
   allowedRoles?: UserRole[];
   requireAcceptedTerms?: boolean;
+  requireAdminPermissions?: {
+    canAcceptMerchants?: boolean;
+    canAcceptAgents?: boolean;
+  };
 }
 
 const ProtectedRoute = ({ 
   children, 
   allowedRoles = [], 
-  requireAcceptedTerms = true 
+  requireAcceptedTerms = true,
+  requireAdminPermissions
 }: ProtectedRouteProps) => {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, refreshSession } = useAuth();
+
+  // Refresh admin/superAdmin session on route change
+  useEffect(() => {
+    if (user && (user.role === 'admin' || user.role === 'superAdmin')) {
+      refreshSession();
+    }
+  }, []);
 
   // Check if user is authenticated
   if (!isAuthenticated) {
+    // Redirect based on attempted access
+    if (allowedRoles.includes('superAdmin')) {
+      return <Navigate to="/superadmin-login" />;
+    }
+    if (allowedRoles.includes('admin')) {
+      return <Navigate to="/admin-login" />;
+    }
     return <Navigate to="/login" />;
   }
 
@@ -33,6 +52,17 @@ const ProtectedRoute = ({
 
   // Check if user has required role
   if (user && allowedRoles.includes(user.role)) {
+    // For admin routes, check if they have required permissions
+    if (user.role === 'admin' && requireAdminPermissions) {
+      const { canAcceptMerchants, canAcceptAgents } = requireAdminPermissions;
+      
+      // Check permissions required for this route
+      if ((canAcceptMerchants && !user.adminPermissions?.canAcceptMerchants) ||
+          (canAcceptAgents && !user.adminPermissions?.canAcceptAgents)) {
+        return <Navigate to="/admin-dashboard" />;
+      }
+    }
+    
     return <>{children}</>;
   }
 
@@ -41,6 +71,8 @@ const ProtectedRoute = ({
     return <Navigate to="/neutral-dashboard" />;
   } else if (user?.role === 'admin') {
     return <Navigate to="/admin-dashboard" />;
+  } else if (user?.role === 'superAdmin') {
+    return <Navigate to="/superadmin-dashboard" />;
   } else if (user?.role === 'merchant') {
     return <Navigate to="/merchant-dashboard" />;
   } else if (user?.role === 'agent') {

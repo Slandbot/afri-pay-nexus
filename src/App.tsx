@@ -15,11 +15,13 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import AdminLogin from "./pages/AdminLogin";
+import SuperAdminLogin from "./pages/SuperAdminLogin";
 import Terms from "./pages/Terms";
 
 // Dashboard Pages
 import NeutralDashboard from "./pages/NeutralDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import SuperAdminDashboard from "./pages/SuperAdminDashboard";
 import MerchantDashboard from "./pages/MerchantDashboard";
 import AgentDashboard from "./pages/AgentDashboard";
 import ServiceRequest from "./pages/ServiceRequest";
@@ -47,13 +49,14 @@ const App = () => (
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/admin-login" element={<AdminLogin />} />
+                  <Route path="/superadmin-login" element={<SuperAdminLogin />} />
                   <Route path="/terms" element={<Terms />} />
                   
                   {/* Neutral User Routes */}
                   <Route 
                     path="/neutral-dashboard" 
                     element={
-                      <ProtectedRoute allowedRoles={['neutral', 'admin', 'merchant', 'agent']}>
+                      <ProtectedRoute allowedRoles={['neutral', 'admin', 'superAdmin', 'merchant', 'agent']}>
                         <DashboardLayout />
                       </ProtectedRoute>
                     }
@@ -65,7 +68,7 @@ const App = () => (
                   <Route 
                     path="/service-request" 
                     element={
-                      <ProtectedRoute allowedRoles={['neutral', 'admin', 'merchant', 'agent']}>
+                      <ProtectedRoute allowedRoles={['neutral', 'admin', 'superAdmin', 'merchant', 'agent']}>
                         <DashboardLayout />
                       </ProtectedRoute>
                     }
@@ -77,19 +80,48 @@ const App = () => (
                   <Route 
                     path="/admin-dashboard" 
                     element={
-                      <ProtectedRoute allowedRoles={['admin']}>
+                      <ProtectedRoute allowedRoles={['admin', 'superAdmin']}>
                         <DashboardLayout />
                       </ProtectedRoute>
                     }
                   >
                     <Route index element={<AdminDashboard />} />
-                    <Route path="approvals" element={<ApprovalsPage />} />
+                    <Route 
+                      path="approvals" 
+                      element={
+                        <ProtectedRoute 
+                          allowedRoles={['admin', 'superAdmin']} 
+                          requireAdminPermissions={{
+                            canAcceptMerchants: true,
+                            canAcceptAgents: true
+                          }}
+                        >
+                          <ApprovalsPage />
+                        </ProtectedRoute>
+                      } 
+                    />
                     <Route path="users" element={<div className="p-4">Users management page (coming soon)</div>} />
                     <Route path="merchants" element={<div className="p-4">Merchants management page (coming soon)</div>} />
                     <Route path="agents" element={<div className="p-4">Agents management page (coming soon)</div>} />
                     <Route path="transactions" element={<div className="p-4">Transactions page (coming soon)</div>} />
                     <Route path="reports" element={<div className="p-4">Reports page (coming soon)</div>} />
                     <Route path="settings" element={<div className="p-4">Settings page (coming soon)</div>} />
+                  </Route>
+                  
+                  {/* SuperAdmin Routes */}
+                  <Route 
+                    path="/superadmin-dashboard" 
+                    element={
+                      <ProtectedRoute allowedRoles={['superAdmin']}>
+                        <DashboardLayout />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index element={<SuperAdminDashboard />} />
+                    <Route path="admins" element={<div className="p-4">Admin management page (coming soon)</div>} />
+                    <Route path="users" element={<div className="p-4">Users management page (coming soon)</div>} />
+                    <Route path="logs" element={<div className="p-4">System logs page (coming soon)</div>} />
+                    <Route path="settings" element={<div className="p-4">System settings page (coming soon)</div>} />
                   </Route>
                   
                   {/* Merchant Routes */}

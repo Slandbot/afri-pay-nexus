@@ -7,13 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AlertCircle, Loader2, Shield, Key } from 'lucide-react';
+import { AlertCircle, Loader2, Shield } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/components/ui/use-toast';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 
-const AdminLogin = () => {
-  const { adminLogin, isLoading } = useAuth();
+const SuperAdminLogin = () => {
+  const { superAdminLogin, isLoading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -21,7 +21,7 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleAdminLogin = async (e: FormEvent) => {
+  const handleSuperAdminLogin = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
 
@@ -32,15 +32,15 @@ const AdminLogin = () => {
     }
 
     try {
-      await adminLogin(emailOrUsername, password);
-      navigate('/admin-dashboard');
+      await superAdminLogin(emailOrUsername, password);
+      navigate('/superadmin-dashboard');
       toast({
-        title: "Admin Login Successful",
-        description: "Welcome to the Admin Dashboard",
+        title: "SuperAdmin Login Successful",
+        description: "Welcome to the SuperAdmin Dashboard",
         variant: "default"
       });
     } catch (err) {
-      setError('Invalid admin credentials. Please try again.');
+      setError('Invalid SuperAdmin credentials. Please try again.');
     }
   };
 
@@ -55,10 +55,10 @@ const AdminLogin = () => {
             <Logo size="lg" />
           </div>
           <CardTitle className="text-2xl font-bold text-afri-secondary dark:text-afri-primary">
-            Admin Login
+            SuperAdmin Login
           </CardTitle>
           <CardDescription className="dark:text-gray-300">
-            Enter your admin credentials to access the system
+            Enter your SuperAdmin credentials to access the system
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -69,11 +69,11 @@ const AdminLogin = () => {
             </Alert>
           )}
           
-          <form onSubmit={handleAdminLogin} className="space-y-4">
+          <form onSubmit={handleSuperAdminLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="admin-email" className="dark:text-gray-200">Username or Email</Label>
+              <Label htmlFor="super-admin-email" className="dark:text-gray-200">Username or Email</Label>
               <Input
-                id="admin-email"
+                id="super-admin-email"
                 type="text"
                 placeholder="Enter your username or email"
                 value={emailOrUsername}
@@ -84,9 +84,9 @@ const AdminLogin = () => {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="admin-password" className="dark:text-gray-200">Password</Label>
+              <Label htmlFor="super-admin-password" className="dark:text-gray-200">Password</Label>
               <Input
-                id="admin-password"
+                id="super-admin-password"
                 type="password"
                 placeholder="Enter your password"
                 value={password}
@@ -108,21 +108,20 @@ const AdminLogin = () => {
                 </>
               ) : (
                 <>
-                  <Key className="mr-2 h-4 w-4" />
-                  Login as Admin
+                  <Shield className="mr-2 h-4 w-4" />
+                  Login as SuperAdmin
                 </>
               )}
             </Button>
-
+            
             <div className="flex justify-between">
               <Button 
                 type="button" 
                 variant="ghost" 
                 className="text-sm"
-                onClick={() => navigate('/superadmin-login')}
+                onClick={() => navigate('/admin-login')}
               >
-                <Shield className="mr-2 h-4 w-4" />
-                SuperAdmin Login
+                Admin Login
               </Button>
               
               <Button 
@@ -141,4 +140,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default SuperAdminLogin;
