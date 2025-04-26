@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,11 +20,43 @@ export default {
     },
     extend: {
       colors: {
+        // Brand Colors
+        'primary': {
+          DEFAULT: '#EC660A',
+          light: '#FF8534',
+          dark: '#D45500',
+        },
+        'accent': {
+          DEFAULT: '#FFD600',
+          light: '#FFE34D',
+          dark: '#CCAB00',
+        },
+        'surface': {
+          DEFAULT: '#eae8e6',
+          dark: '#F5EEE5',
+        },
+        
+        // Gray Scale
+        'gray': {
+          50: 'hsl(210 40% 98%)',
+          100: 'hsl(210 40% 96%)',
+          200: 'hsl(214 32% 91%)',
+          300: 'hsl(213 27% 84%)',
+          400: 'hsl(215 20% 65%)',
+          500: 'hsl(215 16% 47%)',
+          600: 'hsl(215 19% 35%)',
+          700: 'hsl(215 25% 27%)',
+          800: 'hsl(217 33% 17%)',
+          900: 'hsl(222 47% 11%)',
+        },
+        
+        // Legacy AfriPay colors (maintaining for backward compatibility)
         'afri-primary': '#EC6408',
         'afri-secondary': '#4243DC',
         'afri-accent': '#EC660A',
         'afri-background': '#FFF8EF',
         
+        // System theme colors (mapped to CSS variables)
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

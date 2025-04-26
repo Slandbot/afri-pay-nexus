@@ -5,65 +5,67 @@
 
 @layer base {
   :root {
-    --background: 30 100% 97%;  /* #FFF8EF */
-    --foreground: 24 100% 48%;  /* #EC6408 */
+    /* Light mode */
+    --background: 42 100% 97%;  /* #FFF8EF */
+    --foreground: 215 25% 27%;  /* gray-700 */
 
     --card: 0 0% 100%;
-    --card-foreground: 24 100% 48%;  /* #EC6408 */
+    --card-foreground: 215 25% 27%;  /* gray-700 */
  
     --popover: 0 0% 100%;
-    --popover-foreground: 24 100% 48%;  /* #EC6408 */
+    --popover-foreground: 215 25% 27%;  /* gray-700 */
  
-    --primary: 24 100% 48%;  /* #EC6408 */
+    --primary: 28 92% 48%;  /* #EC660A */
     --primary-foreground: 0 0% 100%;
  
-    --secondary: 240 84% 56%;  /* #4243DC */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 49 100% 50%;  /* #FFD600 */
+    --secondary-foreground: 215 25% 27%;  /* gray-700 */
  
-    --muted: 30 100% 97%;  /* #FFF8EF lighter */
-    --muted-foreground: 24 100% 38%;  /* #EC6408 darker */
+    --muted: 30 16% 90%;  /* lighter version of surface */
+    --muted-foreground: 215 16% 47%;  /* gray-500 */
  
-    --accent: 24 84% 48%;  /* #EC660A */
-    --accent-foreground: 0 0% 100%;
+    --accent: 49 100% 50%;  /* #FFD600 */
+    --accent-foreground: 215 25% 27%;  /* gray-700 */
  
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 20% 98%;
 
-    --border: 24 100% 48%;  /* #EC6408 */
-    --input: 24 100% 48%;  /* #EC6408 */
-    --ring: 24 100% 48%;  /* #EC6408 */
+    --border: 28 92% 48%;  /* #EC660A */
+    --input: 28 92% 48%;  /* #EC660A */
+    --ring: 28 92% 48%;  /* #EC660A */
  
     --radius: 0.5rem;
   }
  
   .dark {
-    --background: 240 84% 10%;  /* Dark background based on #4243DC */
-    --foreground: 30 100% 97%;  /* #FFF8EF */
+    /* Dark mode */
+    --background: 24 30% 10%;  /* Dark background */
+    --foreground: 42 100% 97%;  /* #FFF8EF */
  
-    --card: 240 84% 10%;  /* Dark based on #4243DC */
-    --card-foreground: 30 100% 97%;  /* #FFF8EF */
+    --card: 24 30% 15%;  /* Dark card */
+    --card-foreground: 42 100% 97%;  /* #FFF8EF */
  
-    --popover: 240 84% 10%;  /* Dark based on #4243DC */
-    --popover-foreground: 30 100% 97%;  /* #FFF8EF */
+    --popover: 24 30% 15%;  /* Dark popover */
+    --popover-foreground: 42 100% 97%;  /* #FFF8EF */
  
-    --primary: 24 100% 48%;  /* #EC6408 */
-    --primary-foreground: 0 0% 100%;
+    --primary: 28 92% 48%;  /* #EC660A */
+    --primary-foreground: 210 20% 98%;
  
-    --secondary: 240 84% 56%;  /* #4243DC */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 49 100% 50%;  /* #FFD600 */
+    --secondary-foreground: 210 20% 98%;
  
-    --muted: 240 84% 16%;  /* Darker version of #4243DC */
-    --muted-foreground: 24 50% 70%;  /* Lighter version of #EC6408 */
+    --muted: 24 30% 20%;  /* Dark muted */
+    --muted-foreground: 215 20% 65%;  /* gray-400 */
  
-    --accent: 24 84% 48%;  /* #EC660A */
-    --accent-foreground: 0 0% 100%;
+    --accent: 49 100% 50%;  /* #FFD600 */
+    --accent-foreground: 210 20% 98%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
  
-    --border: 240 84% 56%;  /* #4243DC */
-    --input: 240 84% 56%;  /* #4243DC */
-    --ring: 24 100% 48%;  /* #EC6408 */
+    --border: 28 92% 48%;  /* #EC660A */
+    --input: 28 92% 48%;  /* #EC660A */
+    --ring: 28 92% 48%;  /* #EC660A */
   }
 }
 
@@ -76,10 +78,18 @@
   }
 }
 
-/* Additional AfriPay utility classes */
+/* Additional utility classes */
 @layer utilities {
   .afri-pattern-bg {
     background-color: #FFF8EF;
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23EC6408' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
+  .warm-gradient {
+    @apply bg-gradient-to-r from-primary to-accent;
+  }
+  
+  .card-hover {
+    @apply transition-all hover:shadow-lg hover:scale-[1.01];
   }
 }
