@@ -76,6 +76,18 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* New style for smooth theme transitions */
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Smooth transition for all elements */
+  *, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
 }
 
 /* Additional utility classes */
@@ -85,11 +97,33 @@
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23EC6408' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
+  .dark .afri-pattern-bg {
+    background-color: hsl(24 30% 10%);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23EC6408' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
   .warm-gradient {
     @apply bg-gradient-to-r from-primary to-accent;
   }
   
   .card-hover {
     @apply transition-all hover:shadow-lg hover:scale-[1.01];
+  }
+  
+  /* Currency-related utility classes */
+  .currency-symbol {
+    @apply font-semibold;
+  }
+  
+  .currency-usd::before {
+    content: "$";
+  }
+  
+  .currency-eur::before {
+    content: "€";
+  }
+  
+  .currency-gbp::before {
+    content: "£";
   }
 }
